@@ -1,0 +1,33 @@
+public class PaperRockScissors {
+
+    private static final Map<String, String> RESULTS = new HashMap<String, String>() {{
+        put("00", "empate");
+        put("01", "victoria");
+        put("02", "derrota");
+        put("10", "derrota");
+        put("11", "empate");
+        put("12", "victoria");
+        put("20", "victoria");
+        put("21", "derrota");
+        put("22", "empate");
+    }};
+
+    private int guess;
+
+    private Scanner scanner = new Scanner(System.in);
+
+    public PaperRockScissors() {
+        this.guess = new Random().nextInt(3);
+    }
+
+    public String play() {
+        System.out.println("Ingresa 0 (paper), 1 (rock), or 2 (scissors): ");
+
+        String result = this.RESULTS.get(this.scanner.nextLine() + this.guess);
+
+        System.out.println("El resultado fue " + resultado + " para ti.");
+        System.out.println();
+
+        return resultado;
+    }
+}
