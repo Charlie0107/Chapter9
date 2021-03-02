@@ -1,0 +1,52 @@
+public class EventDemo {
+
+    
+    public static void main(String[] args) {
+        String num_evento;
+        int invitados;
+        
+        Event detalles_evento = new evento();
+        num_evento = getNumero_evento();
+        invitados = getNumero_invitados();
+        
+        Event detalles_evento2 = new evento(numero_evento, invitados);
+        
+        displayDetalles_evento(detalles_evento);
+        displayDetalles_evento(detalles_evento2);
+    }
+    
+    public static String getNumero_evento(){
+        Scanner input = new Scanner (System.in);
+        System.out.println("Ingresa el numero de evento: ");
+        String Numero_evento = input.nextLine();
+        return numero_evento;
+    }
+    
+    public static int getNumero_invitados(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Ingresa el numero de invitados: ");
+        int numOfGuests = input.nextInt();
+        displayEvent();
+        return Numero_invitados;
+    }  
+    
+    public static void displayEvent(){
+        System.out.println("Fiestaaaaa");
+        
+    }
+        
+    public static void displayDetalles_evento(evento detalles_evento){
+        
+        if (detalles_evento.getNumbero_invitados()>=evento.CUT_OFF_AMOUNT) {
+            System.out.println("Tu fiesta es demasiado grande.");
+        }
+        else {
+        System.out.println("DETALLES DEL EVENTO");
+        System.out.println("El numero del evento es : " + detalles_evento.getNumero_evento());
+        System.out.println("El numero de invitados son: " + detalles_evento.getNumero_invitados());
+        System.out.println("El costo total es: $" + detalles_evento.getPrecio());
+        }
+        
+    }
+          
+}
