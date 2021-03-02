@@ -1,0 +1,66 @@
+public class FullDeck {
+
+    public static final int VERSION = 0;
+
+    public static final int DECK_SIZE = CardSuit.values().length * CardNumber.values().length;
+
+    private THashMap<Integer, Card> cards;
+    private final factor_carta factor_carta;
+    private final configuraciones;
+    private final Random r;
+
+    public FullDeck(factor_carta factor_carta, configuraciones) {
+        cards = new THashMap<>(DECK_SIZE);
+        this.factor_carta = factor_carta;
+
+        this.configuraciones = configuraciones;
+        if (configuraciones.getSetting("randomSeed") != null) {
+            int seed = Integer.getInteger(configuraciones.getSetting("randomSeed"));
+            r = new Random(seed);
+        } else {
+            r = new Random();
+        }
+        reset();
+    }
+    public void reset() {
+        cards.clear();
+        int cardNum = 0;
+        for (CardSuit suit : CardSuit.values()) {
+            for (CardNumber number : CardNumber.values()) {
+                cards.put(cardNum, factor_carta.createCard(number, suit));
+                cardNum++;
+            }
+        }
+    }
+
+ 
+    public Card drawFromDeck() {
+
+        if (cards.size() == 0) {
+            return null;
+        }
+
+        Card card = null;
+        int cardInd = r.nextInt(DECK_SIZE);
+
+        while (cards.get(cardInd) == null) {
+            cardInd = r.nextInt(DECK_SIZE);
+        }
+
+        card = cards.get(cardInd);
+        cards.remove(cardInd);
+        return card;
+    }
+
+   
+    public Card drawFromDeck(CardSuit cardSuit, CardNumber cardNumber) {
+        Card card = null;
+        int cardPos = cardSuit.getId() * CardNumber.values().length + cardNumber.getId();
+
+        card = cards.get(cardPos);
+        if (card != null) {
+            cards.remove(cardPos);
+        }
+
+        return card;
+    }
