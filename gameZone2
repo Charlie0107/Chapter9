@@ -1,0 +1,138 @@
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.regex.*;
+
+public class TicTacToe {
+
+  public static Game game;
+  public static int count = 0;
+  public static String usuario;
+  
+  private static int gameMode;
+  private static boolean correcto;
+  
+  public static void main(String[] args){
+  
+    int gameSize;
+    int minimumGameSize = 1;
+    int maximumGameSize = 26;
+  
+    System.out.println("\n\tWelcome to this wonderful and lovely game of TicTacToe.");
+    System.out.println("\n\tPlease select your Game mode.");
+    System.out.println("\n\t    (1) Human vs. Computer");
+    System.out.println("\n\t    (2) Computer vs. Computer");
+    usuario = getInput("\n\tWhich mode would you like to play? (1/2): ");
+    
+    gameMode(usuario); //gameMode() is defines below
+    
+    System.out.println("\n\tHow large of a grid would you like to use? ");
+    usuario = getInput("\n\tPlease enter an integer between " + minimumGameSize + " and " + maximumGameSize + ": ");
+    
+    correcto = false;
+    while(!correcto){
+    
+      if( usuario.length() > 0 && (usuario.substring(0, 1).matches("[1-9]")) && (minimumGameSize <= Integer.parseInt(usuario)) && (Integer.parseInt(usuario) <= maximumGameSize) ){
+      
+        correcto = true;
+        
+      } else {
+      
+        usuario = getInput("\n\tDeberas elegir entre " + minimumGameSize + " y " + maximumGameSize + ": ");
+        
+      }
+    }
+    
+    if(Integer.parseInt(usuario) > 15){
+    
+      getInput("");
+      
+    }
+    
+    gameSize = Integer.parseInt(usuario);
+    
+    game = new Game(gameSize);
+    
+    Player[] players = new Player[2];
+    
+    if(gameMode==1){
+    
+      Jugadores[0] = new Jugador("Humano");
+      Jugadores[1] = new Jugador("IO");
+      
+    } else {
+    
+      Jugadores[0] = new Jugador("IO");
+      Jugadores[1] = new Jugadores("IO");
+      
+    }
+    
+    System.out.println(game.output());
+   
+    while (!game.final) {
+    
+      for(Jugador Jugador : Jugadores){
+      
+        player.go();
+        System.out.println("\n" + game.final());
+        count += 1;
+        
+        if(game.finished){
+        }
+        
+      }
+    }
+    
+    if (game.draw) {
+    
+      System.out.println("\n\tGato!");
+      
+    } else {
+    
+      if(count%2==1){
+      
+        System.out.println("\n\tX's ganador!");
+        
+      } else {
+      
+        System.out.println("\n\tO's ganador!");
+        
+      }
+    }
+  }
+  
+  public static String getInput(String prompt) {
+  
+    BufferedReader stdin = new BufferedReader( new InputStreamReader(System.in));
+    
+    System.out.print(prompt);
+    System.out.flush();
+    
+    try {
+    
+      return stdin.readLine();
+      
+    } catch (Exception e) {
+    
+      return "Error: " + e.getMessage();
+      
+    }
+  }
+  
+  private static void gameMode(String usuario) {
+    
+    correcto = false;
+    while(!correcto){
+      if((usuario.length() == 1) && (usuario.substring(0,1).matches("[1-2]"))){
+        correcto = true;      
+      } else {
+      
+ usuario = getInput("\n\tDeberas elegir entre '1' or '2' para el modo de juego: ");
+        
+      }
+    }
+    
+    gameMode = Integer.parseInt(usuario);
+    
+  }
+}
