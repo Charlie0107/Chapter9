@@ -1,0 +1,64 @@
+import javax.swing.JOptionPane; 
+public class DoesItHaveLegs
+{
+   public static void main(String args[])
+   {
+      String[] preguntas= new String[100];
+      String[] respuestas= new String[100];
+      String animal= new String();
+      String pregunta= new String();
+      boolean realizado= false;
+      boolean jugar= true;
+      int respuesta;
+      int total = 100;
+      int pos = 0, oldPos = 0;
+      int SiPos = 1, noPos = 2;
+      questions[pos] = "¿Tiene patas el animal en el que estás pensando??";
+      questions[1] = "Es un perro?";
+      questions[2] = "Es un pescado?";
+      respuestas[1] = "perro";
+      respuestas[2] = "pescado";
+      while(seguir_jugando)
+      {
+         pos = 0;
+         realizado= false;
+         while(realizado== false)
+         { 
+            respuesta = JOptionPane.showConfirmDialog(null, preguntas[pos]);
+            oldPos = pos;
+            siPos = pos * 2 + 1;
+            noPos = pos * 2 + 2;
+            if(respuesta == JOptionPane.YES_OPTION)
+               pos = yesPos;
+            else
+               pos = noPos;
+            if(questions[pos] == null)
+            {
+               if(respuesta == JOptionPane.Si_OPTION)
+               {
+                  JOptionPane.showMessageDialog(null, "Sii! Gane!");
+                  realizado= true;
+                  pos = 0;
+               }
+               else
+               {
+                  animal= JOptionPane.showInputDialog(null,
+                     "Me rindo.\nCual era tu animal?");
+                  pregunta= JOptionPane.showInputDialog(null,
+                     "Escriba una pregunta para la que la respuesta sea Sí para " +
+                     respuestas[oldPos] + "\nno para " + animal+ ".");
+                  questions[yesPos] = preguntas[oldPos];
+                  questions[oldPos] = pregunta;
+                  questions[noPos] = "Is it a " + animal+ "?";
+                  respuestas[yesPos] = respuestas[oldPos];
+                  respuestas[noPos] = pregunta;
+                  realizado= true;
+                  pos = 0;
+               }   
+            }
+         }
+         respuesta = JOptionPane.showConfirmDialog(null, "Quieres volver a jugar?");
+         jugar= (respuesta == JOptionPane.Si_OPTION);
+      }
+   }
+}
